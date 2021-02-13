@@ -3,7 +3,9 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 const Category = (props) => {
-	const { products, getProduct, category } = useContext(ApiContext);
+	const { products, getProduct, category, categories } = useContext(
+		ApiContext
+	);
 	const history = useHistory();
 	const handleClick = (id, slug) => {
 		getProduct(id);
@@ -36,7 +38,7 @@ const Category = (props) => {
 				  })
 				: category
 				? "No Products to Show"
-				: "Select a Category"}
+				: !!categories.length && "Select a Category"}
 		</div>
 	);
 };
