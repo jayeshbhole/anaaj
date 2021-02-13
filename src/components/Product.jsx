@@ -5,19 +5,15 @@ const Product = () => {
 	const { product, getProduct } = useContext(ApiContext);
 	const { id } = useParams();
 	useEffect(() => {
-		if (!product) {
-			console.log(id, product);
-			getProduct(id);
-		}
-		console.log(product);
+		if (!product) getProduct(id);
 	}, []);
 	return product ? (
 		<div className='Product page'>
 			{product.name}
-			<img src={product.images[0].src} alt='' />
+			<img id='product-image' src={product.images[0].src} alt='' />
 		</div>
 	) : (
-		<div className='Product'>Loading Product</div>
+		<div className='Product page'>Loading Product ... </div>
 	);
 };
 export default Product;

@@ -120,5 +120,8 @@ nav {
 		}
 	}
 	&.Product {
+		#product-image {
+			height: 40vh;
+		}
 	}
 }
