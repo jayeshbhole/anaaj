@@ -1,7 +1,9 @@
 import { useState, createContext } from "react";
-// OAuth 1.0
+
+// OAuth 1.0 preparation
 import axios from "axios";
 import addOAuthInterceptor from "axios-oauth-1.0a";
+// Axios client
 const client = axios.create();
 addOAuthInterceptor(client, {
 	key: process.env.REACT_APP_CK,
@@ -9,6 +11,7 @@ addOAuthInterceptor(client, {
 	algorithm: "HMAC-SHA1",
 });
 
+// Context for Data fetched API
 const ApiContext = createContext({
 	categories: [],
 	category: null,
@@ -20,11 +23,25 @@ const ApiContext = createContext({
 	getProduct: () => {},
 });
 
+// Context Provider
 const ApiContextProvider = (props) => {
 	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState();
 	const [products, setProducts] = useState([]);
 	const [product, setProduct] = useState();
+
+	const loading = {
+		id: "loading",
+		name: "Loading",
+		slug: "loading",
+		price: "...",
+		images: [
+			{
+				src: "/loading.png",
+			},
+		],
+	};
+
 	const getCategories = () => {
 		client
 			.get("https://smartanaaj.com/wp-json/wc/v3/products/categories")
@@ -37,12 +54,13 @@ const ApiContextProvider = (props) => {
 	};
 	const getProducts = (categoryId) => {
 		setCategory(categoryId);
+		setProducts([loading]);
 		client
 			.get(
 				`https://smartanaaj.com/wp-json/wc/v3/products?category=${categoryId}`
 			)
 			.then((res) => {
-				console.log(res.data);
+				console.log("Here");
 				setProducts(res.data);
 			})
 			.catch((error) => {
@@ -54,10 +72,10 @@ const ApiContextProvider = (props) => {
 		client
 			.get(`https://smartanaaj.com/wp-json/wc/v3/products/${id}`)
 			.then((res) => {
-				console.log(res.data);
 				setProduct(res.data);
 			})
 			.catch((error) => {
+				// Set Error Data for the product page
 				setProduct({
 					name: "Product Not Found",
 					images: [
@@ -67,7 +85,6 @@ const ApiContextProvider = (props) => {
 						},
 					],
 				});
-				console.log(error);
 			});
 	};
 	return (

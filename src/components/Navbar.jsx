@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 
+// Basic Navbar
 const Navbar = () => {
 	return (
 		<nav className='nav'>
