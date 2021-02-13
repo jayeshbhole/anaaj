@@ -1,14 +1,25 @@
 import { ApiContext } from "../context/ApiContext";
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 const Category = (props) => {
-	const { products } = useContext(ApiContext);
+	const { products, getProduct } = useContext(ApiContext);
+	const history = useHistory();
+	const handleClick = (id, slug) => {
+		getProduct(id);
+		history.push(`/product/${id}/${slug}`);
+	};
 	return (
 		<div className='products'>
 			{products.length
 				? products.map((p) => {
 						return (
-							<div className='product' key={p.id}>
+							<div
+								className='product'
+								key={p.id}
+								onClick={() => {
+									handleClick(p.id, p.slug);
+								}}>
 								<img
 									className='product-img'
 									src={
