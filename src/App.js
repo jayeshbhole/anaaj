@@ -20,8 +20,13 @@ const App = () => {
 					<>
 						{/* Routes */}
 						<Switch>
-							<Route path='/category' component={Category} />
 							<Route
+								exact
+								path='/category'
+								component={Category}
+							/>
+							<Route
+								exact
 								path='/product/:id/:name'
 								component={Product}
 							/>
