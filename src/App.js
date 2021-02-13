@@ -1,25 +1,17 @@
 // Components
-import React, { useState } from "react";
-import {
-	Switch,
-	Route,
-	BrowserRouter,
-	// Redirect,
-	// useParams,
-} from "react-router-dom";
+import React from "react";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import Category from "./components/Category.jsx";
 import Product from "./components/Product.jsx";
 import Shop from "./components/Shop.jsx";
 import Navbar from "./components/Navbar.jsx";
 
 // Contexts
-import { ApiContext, ApiContextProvider } from "./context/ApiContext";
+import { ApiContextProvider } from "./context/ApiContext";
 // import CartContext from "./context/CartContext";
 
 // App
 const App = () => {
-	const [cart, setCart] = useState({});
-
 	return (
 		<React.Fragment>
 			<ApiContextProvider>
@@ -32,17 +24,13 @@ const App = () => {
 								component={() => <Category />}
 							/>
 							<Route
-								path='/product'
+								path='/product/:id/:name'
 								component={() => <Product />}
 							/>
-							{/* <Route
-								path='/shop/:slug'
-								component={(props) => <Shop {...props} />}
-							/> */}
 							<Route exact path='/shop' component={Shop} />
 							<Route exact path='/' component={Home} />
 							<Route path='/404' component={Err} />
-							{/* <Redirect to='/404' /> */}
+							<Redirect to='/404' />
 						</Switch>
 					</>
 				</BrowserRouter>
@@ -57,10 +45,10 @@ const Home = () => {
 		</div>
 	);
 };
-const Err = () => {
+const Err = (props) => {
 	return (
 		<div className='page'>
-			<h1>404 Error</h1>
+			<h1>{props.id} Error</h1>
 			<br /> Page not found
 		</div>
 	);
