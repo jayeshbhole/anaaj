@@ -1,9 +1,124 @@
-@import "~react-bulma-components/src/index.sass";
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+* {
+	margin: 0;
+	padding: 0;
+}
 body {
-	//
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 18px;
+	min-height: 100vh;
+	overflow-x: hidden;
+	background-color: #f6f6f6;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+nav {
+	position: sticky;
+	top: 0;
+	background-color: rgb(240, 199, 18);
+	:link,
+	:visited {
+		color: rgb(12, 9, 49);
+		text-decoration: none;
+	}
+	ul {
+		display: flex;
+		justify-content: space-around;
+		width: 100%;
+		list-style: none;
+		padding: 0.75rem 0.3rem;
+		li {
+			font-weight: 400;
+			width: fit-content;
+			margin: 0;
+			.active {
+				font-weight: 600;
+			}
+		}
+	}
+}
+
+.page {
+	padding: 2.5rem 2rem;
+	height: 100%;
+	&.Shop {
+		display: flex;
+		justify-content: flex-start;
+		.categories {
+			overflow: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			min-width: 35ch;
+			transition: all 0.5s ease-in-out;
+			padding: 0rem 0.3rem;
+			margin: 0;
+			height: fit-content;
+			.categoryItem {
+				width: 100%;
+				margin: 0.75rem 0;
+				background: #ffefbd;
+				border-radius: 1rem;
+				box-shadow: none;
+				&.active {
+					background: #ffe493;
+					box-shadow: rgba(99, 99, 99, 0.151) 0px 2px 8px 0px;
+				}
+				button {
+					width: 100%;
+					padding: 0.5rem 0.3rem;
+					font-size: 1rem;
+					border: none;
+					display: flex;
+					align-items: center;
+					justify-content: space-around;
+					background: none;
+
+					img {
+						border-radius: 30%;
+						height: 3rem;
+						width: 3rem;
+					}
+					&:hover {
+						cursor: pointer;
+					}
+					&:focus {
+						outline: none;
+					}
+				}
+				&:hover {
+					box-shadow: rgba(99, 99, 99, 0.151) 0px 2px 8px 0px;
+				}
+			}
+		}
+		.products {
+			padding: 0.75rem 2rem;
+			width: 100%;
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			.product {
+				margin: auto;
+				margin-top: 0;
+				margin-bottom: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				background-color: #ffefbd;
+				padding: 0.75rem 0.8rem;
+				height: fit-content;
+				width: min-content;
+				border-radius: 0.75rem;
+				.product-img {
+					border-radius: 0.75rem;
+					height: 8rem;
+					width: 8rem;
+					margin: 0.75rem 0rem;
+				}
+				&:hover {
+					cursor: pointer;
+					box-shadow: rgba(99, 99, 99, 0.151) 0px 2px 8px 0px;
+				}
+			}
+		}
+	}
+	&.Product {
+	}
 }
