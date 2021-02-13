@@ -13,7 +13,8 @@ const ApiContext = createContext({
 	categories: [],
 	category: null,
 	products: [],
-	product: {},
+	product: null,
+	error: null,
 	getCategories: () => {},
 	getProducts: () => {},
 	getProduct: () => {},
@@ -23,13 +24,11 @@ const ApiContextProvider = (props) => {
 	const [categories, setCategories] = useState([]);
 	const [category, setCategory] = useState();
 	const [products, setProducts] = useState([]);
-	const [product, setProduct] = useState({});
+	const [product, setProduct] = useState();
 	const getCategories = () => {
-		console.log("here");
 		client
 			.get("https://smartanaaj.com/wp-json/wc/v3/products/categories")
 			.then((res) => {
-				console.log(res.data);
 				setCategories(res.data);
 			})
 			.catch((error) => {
@@ -51,6 +50,7 @@ const ApiContextProvider = (props) => {
 			});
 	};
 	const getProduct = (id) => {
+		setProduct();
 		client
 			.get(`https://smartanaaj.com/wp-json/wc/v3/products/${id}`)
 			.then((res) => {
@@ -58,6 +58,15 @@ const ApiContextProvider = (props) => {
 				setProduct(res.data);
 			})
 			.catch((error) => {
+				setProduct({
+					name: "Product Not Found",
+					images: [
+						{
+							src:
+								"https://www.seekpng.com/png/detail/825-8254341_404-error-not-found.png",
+						},
+					],
+				});
 				console.log(error);
 			});
 	};
