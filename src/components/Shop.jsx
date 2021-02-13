@@ -31,7 +31,7 @@ const Shop = () => {
 											src={
 												c.image
 													? c.image
-													: "http://www.amis-outlook.org/uploads/RTEmagicC_wheat_1_05.jpg.jpg"
+													: "https://freepngimg.com/thumb/grocery/53777-8-grain-png-download-free.png"
 											}
 											alt=''
 										/>
