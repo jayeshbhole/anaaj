@@ -2,43 +2,37 @@ import { ApiContext } from "../context/ApiContext";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
+// Individual category and its products
 const Category = (props) => {
 	const { products, getProduct, category, categories } = useContext(
 		ApiContext
 	);
+};
+const CategoryItem = (props) => {
+	const { getProduct } = useContext(ApiContext);
+	const { id, slug, price, name, images } = props.p;
+
 	const history = useHistory();
 	const handleClick = (id, slug) => {
+		// Fetch required product
 		getProduct(id);
+		// Redirect too product page
 		history.push(`/product/${id}/${slug}`);
 	};
+
 	return (
-		<div className='products'>
-			{products.length
-				? products.map((p) => {
-						return (
-							<div
-								className='product'
-								key={p.id}
-								onClick={() => {
-									handleClick(p.id, p.slug);
-								}}>
-								<img
-									className='product-img'
-									src={
-										p.images[0]
-											? p.images[0].src
-											: "https://i1.wp.com/smartanaaj.com/wp-content/uploads/2021/01/product.png?fit=1539%2C2052&ssl=1"
-									}
-									alt=''
-								/>
-								{p.name}
-								<span className='price'>₹ {p?.price}/kg</span>
-							</div>
-						);
-				  })
-				: category
-				? "No Products to Show"
-				: !!categories.length && "Select a Category"}
+		<div key={id} className='product' onClick={() => handleClick(id, slug)}>
+			<img
+				className='product-img'
+				src={
+					images[0]
+						? images[0].src
+						: "https://i1.wp.com/smartanaaj.com/wp-content/uploads/2021/01/product.png?fit=1539%2C2052&ssl=1"
+				}
+				alt=''
+			/>
+			{name}
+			<span className='price'>₹ {price}/kg</span>
 		</div>
 	);
 };
