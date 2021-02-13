@@ -1,18 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 
 import Category from "./Category.jsx";
 import { ApiContext } from "../context/ApiContext";
-import { useHistory } from "react-router-dom";
 
-const Shop = (props) => {
+const Shop = () => {
 	const { categories, category, getProducts, getCategories } = useContext(
 		ApiContext
 	);
 	useEffect(() => {
 		if (!categories.length) getCategories();
 	}, []);
-	const history = useHistory();
-	const handleGetCategory = (id, slug) => {
+	const handleGetCategory = (id) => {
 		getProducts(id);
 	};
 	return (
@@ -27,9 +25,7 @@ const Shop = (props) => {
 									}`}
 									key={c.id}>
 									<button
-										onClick={() =>
-											handleGetCategory(c.id, c.slug)
-										}>
+										onClick={() => handleGetCategory(c.id)}>
 										{c.name}
 										<img
 											src={
