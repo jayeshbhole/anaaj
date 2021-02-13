@@ -18,14 +18,12 @@ const App = () => {
 				<BrowserRouter>
 					<Navbar>Anaaj</Navbar>
 					<>
+						{/* Routes */}
 						<Switch>
-							<Route
-								path='/category'
-								component={() => <Category />}
-							/>
+							<Route path='/category' component={Category} />
 							<Route
 								path='/product/:id/:name'
-								component={() => <Product />}
+								component={Product}
 							/>
 							<Route exact path='/shop' component={Shop} />
 							<Route exact path='/' component={Home} />
@@ -38,6 +36,7 @@ const App = () => {
 		</React.Fragment>
 	);
 };
+// Minimal Home Component
 const Home = () => {
 	return (
 		<div className='page'>
@@ -45,10 +44,11 @@ const Home = () => {
 		</div>
 	);
 };
-const Err = (props) => {
+// Minimal 404 Page
+const Err = () => {
 	return (
 		<div className='page'>
-			<h1>{props.id} Error</h1>
+			<h1>404 Error</h1>
 			<br /> Page not found
 		</div>
 	);
