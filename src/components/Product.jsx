@@ -1,38 +1,35 @@
 import { ApiContext } from "../context/ApiContext";
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+
+// Main Product component
 const Product = () => {
 	const [quantity, setQuantity] = useState(0);
-	const [cost, setCost] = useState(0);
 	const { product, getProduct, category } = useContext(ApiContext);
 	const { id } = useParams();
+
+	// Get products from URL params if no product was selected from /categories
 	useEffect(() => {
 		if (!product && !category) getProduct(id);
 	}, []);
-	const handleChange = (type, val) => {
-		switch (type) {
-			case "text":
-				val >= 0 && !isNaN(val) ? setQuantity(val) : setQuantity(0);
-				break;
-			case "inr":
-				setQuantity(quantity + 1);
-				break;
-			case "dcrs":
-				setQuantity(quantity - 1);
-				break;
-			default:
-				break;
-		}
+
+	// handle Quantity input change
+	// takes event target value -> changes quantity state
+	const handleChange = (val) => {
+		val >= 0 && !isNaN(val) ? setQuantity(val) : setQuantity(0);
 	};
+	const defaultImg =
+		"https://freepngimg.com/thumb/grocery/53777-8-grain-png-download-free.png";
+
 	return product ? (
+		// return this if product is fetched
+
 		<div className='Product page'>
 			<div className='meta'>
+				{/* Render Default image if not specified */}
 				<img
 					id='product-image'
-					src={
-						product.images[0]?.src ||
-						"https://freepngimg.com/thumb/grocery/53777-8-grain-png-download-free.png"
-					}
+					src={product.images[0]?.src || defaultImg}
 					alt=''
 				/>
 				<div className='commerce'>
@@ -44,23 +41,24 @@ const Product = () => {
 							{product.regular_price}/kg
 						</h3>
 						<br />
-						<span>
-							{product.regular_price === product.price ? (
-								<>
-									<b>Discounted Price : ₹</b> {product.price}
-									/kg
-								</>
+
+						<h3>
+							{/* Render if price is discounted else render null */}
+							{product.regular_price !== product.price ? (
+								<>Discounted Price : ₹ {product.price} /kg</>
 							) : null}{" "}
-						</span>
+						</h3>
 						<h4>Add to cart</h4>
 						<br />
+
+						{/* Number input */}
 						<span id='quantity'>
 							Quantity:{" "}
 							<input
 								type='number'
 								id='qty'
 								onChange={(e) => {
-									handleChange("text", e.target.value);
+									handleChange(e.target.value);
 								}}
 								min='0'
 								range='[0-9]'
@@ -68,6 +66,7 @@ const Product = () => {
 							/>
 						</span>
 						<br />
+						{/* Rendering cost in Disabled Text area */}
 						<span id='cost'>
 							Cost:
 							<input
@@ -83,6 +82,7 @@ const Product = () => {
 			</div>
 		</div>
 	) : (
+		// return default loading
 		<div className='Product page'>Loading Product ... </div>
 	);
 };
