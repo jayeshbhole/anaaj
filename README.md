@@ -1,5 +1,7 @@
 # Smart Anaaj
 
+[](./src/assets/img/ss1.png)
+
 Smart Anaaj is a web application to display shop items and add them to the cart.
 Deployed at [Smart Anaaj](anaaj.netlify.app)
 
