@@ -7,15 +7,19 @@ const Shop = () => {
 	const { categories, category, getProducts, getCategories } = useContext(
 		ApiContext
 	);
+	// get categories after component mounts
 	useEffect(() => {
 		if (!categories.length) getCategories();
 	}, []);
+
+	// get products for selected category
 	const handleGetCategory = (id) => {
 		getProducts(id);
 	};
 	return (
 		<div className='Shop page'>
 			<div className='categories'>
+				{/* If categories, Map categories into the component for a sidebar else render nothing */}
 				{categories
 					? categories.map((c) => {
 							return (

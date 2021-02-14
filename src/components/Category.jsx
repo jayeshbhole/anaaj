@@ -43,6 +43,7 @@ const CategoryItem = (props) => {
 
 	return (
 		<div key={id} className='product' onClick={() => handleClick(id, slug)}>
+			{/* display product image or default image */}
 			<img
 				className='product-img'
 				src={

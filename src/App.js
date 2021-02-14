@@ -22,11 +22,6 @@ const App = () => {
 						<Switch>
 							<Route
 								exact
-								path='/category'
-								component={Category}
-							/>
-							<Route
-								exact
 								path='/product/:id/:name'
 								component={Product}
 							/>
@@ -46,6 +41,10 @@ const Home = () => {
 	return (
 		<div className='page'>
 			<h1>Smart Anaaj</h1>
+			<p>
+				Welcome to Smart Anaaj. Head over to the shop to view the
+				products.
+			</p>
 		</div>
 	);
 };
@@ -54,7 +53,7 @@ const Err = () => {
 	return (
 		<div className='page'>
 			<h1>404 Error</h1>
-			<br /> Page not found
+			<br /> Resource / Page not found
 		</div>
 	);
 };

@@ -30,6 +30,7 @@ const ApiContextProvider = (props) => {
 	const [products, setProducts] = useState([]);
 	const [product, setProduct] = useState();
 
+	// Default loading placeholder product information
 	const loading = {
 		id: "loading",
 		name: "Loading",
@@ -59,10 +60,7 @@ const ApiContextProvider = (props) => {
 			.get(
 				`https://smartanaaj.com/wp-json/wc/v3/products?category=${categoryId}`
 			)
-			.then((res) => {
-				console.log("Here");
-				setProducts(res.data);
-			})
+			.then((res) => setProducts(res.data))
 			.catch((error) => {
 				console.log(error);
 			});
